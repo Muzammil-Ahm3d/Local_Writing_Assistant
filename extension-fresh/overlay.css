@@ -1,0 +1,244 @@
+/* overlay.css - Local Writing Assistant Styles */
+
+/* Toolbar buttons */
+.lwa-btn {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    color: #24292f;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 2px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.lwa-btn:hover {
+    background-color: #f3f4f6;
+    border-color: #d0d7de;
+}
+
+.lwa-btn:active {
+    background-color: #e5e7eb;
+    transform: translateY(1px);
+}
+
+.lwa-btn:disabled {
+    background-color: #f6f8fa;
+    border-color: #d0d7de;
+    color: #6e7781;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Specific button styles */
+.lwa-mic-btn {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+
+.lwa-mic-btn:hover {
+    background: #16a34a;
+    border-color: #16a34a;
+}
+
+.lwa-close-btn {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 8px;
+}
+
+.lwa-close-btn:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+/* Toolbar container */
+.lwa-toolbar {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    padding: 8px;
+    position: fixed;
+    z-index: 10000;
+}
+
+.lwa-toolbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Grammar underlines */
+.lwa-underline {
+    text-decoration: underline wavy #ff6b6b !important;
+    text-decoration-thickness: 2px !important;
+    text-underline-offset: 2px !important;
+    cursor: pointer;
+}
+
+.lwa-underline:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+/* Input indicators for textareas/inputs */
+input[data-lwa-issues],
+textarea[data-lwa-issues] {
+    border-bottom-color: #ff6b6b !important;
+    border-bottom-width: 2px !important;
+    border-bottom-style: solid !important;
+}
+
+/* Notifications */
+.lwa-notification {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    z-index: 10001 !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    max-width: 300px !important;
+    word-wrap: break-word !important;
+    animation: lwa-slide-in 0.3s ease-out !important;
+}
+
+.lwa-notification-success {
+    background: #22c55e !important;
+    color: white !important;
+}
+
+.lwa-notification-error {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.lwa-notification-warning {
+    background: #f59e0b !important;
+    color: white !important;
+}
+
+.lwa-notification-info {
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+/* Animation for notifications */
+@keyframes lwa-slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Hide toolbar when printing */
+@media print {
+    .lwa-toolbar,
+    .lwa-notification {
+        display: none !important;
+    }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+    .lwa-toolbar {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+    }
+    
+    .lwa-btn {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .lwa-btn:hover {
+        background: #4b5563;
+    }
+    
+    .lwa-btn:active {
+        background: #6b7280;
+    }
+    
+    .lwa-btn:disabled {
+        background: #1f2937;
+        color: #9ca3af;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .lwa-underline {
+        text-decoration: underline solid #ff0000 !important;
+        text-decoration-thickness: 3px !important;
+    }
+    
+    .lwa-toolbar {
+        border-width: 2px;
+        box-shadow: none;
+    }
+    
+    .lwa-btn {
+        border-width: 2px;
+        font-weight: bold;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .lwa-btn,
+    .lwa-notification {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .lwa-toolbar {
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+    }
+    
+    .lwa-toolbar-buttons {
+        justify-content: space-between;
+    }
+    
+    .lwa-btn {
+        flex: 1;
+        margin: 0 1px;
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+    
+    .lwa-notification {
+        left: 10px !important;
+        right: 10px !important;
+        max-width: none !important;
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Writing Assistant",
+  "version": "1.0.1",
+  "description": "Local AI writing helper",
+  
+  "permissions": ["storage"],
+  "host_permissions": ["http://127.0.0.1:*/*"],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html"
+  },
+  
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Assistant Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .contenteditable {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            min-height: 100px;
+            background: white;
+        }
+        .instructions {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Writing Assistant Test Page</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li><strong>Make sure your server is running</strong> on http://127.0.0.1:8001</li>
+            <li><strong>Install the extension</strong> from the <code>extension-fresh</code> folder</li>
+            <li><strong>Configure the extension</strong> (Settings → Server URL: http://127.0.0.1:8001, API Token: test123456789)</li>
+            <li><strong>Click in any text field below</strong> and type some text</li>
+            <li><strong>Look for the floating toolbar</strong> with buttons: Fix, Concise, Formal, Friendly, 🎤</li>
+        </ol>
+    </div>
+
+    <div class="form-group">
+        <label for="simple-input">Simple Text Input:</label>
+        <input type="text" id="simple-input" placeholder="Type something informal like 'hey whats up'">
+    </div>
+
+    <div class="form-group">
+        <label for="email-input">Email Input:</label>
+        <input type="email" id="email-input" placeholder="test@example.com">
+    </div>
+
+    <div class="form-group">
+        <label for="textarea">Textarea:</label>
+        <textarea id="textarea" placeholder="Write a longer message here. Try: 'hey how r u doing? i hope ur good.'"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="contenteditable">ContentEditable Div:</label>
+        <div id="contenteditable" class="contenteditable" contenteditable="true">
+            Click here and start typing... Try: "i cant believe this is working so good"
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3>Test Cases:</h3>
+        <ul>
+            <li><strong>Informal → Formal:</strong> "hey whats up" → should become more professional</li>
+            <li><strong>Grammar Fix:</strong> "i cant believe this" → should fix capitalization and contractions</li>
+            <li><strong>Friendly tone:</strong> "Please complete the task immediately" → should become warmer</li>
+            <li><strong>Concise:</strong> "I would like to ask if you could possibly help me" → should be shorter</li>
+        </ul>
+    </div>
+
+    <script>
+        // Add some debug logging
+        console.log('🔧 Test page loaded. Check for Writing Assistant extension...');
+        
+        // Check if extension is working
+        setTimeout(() => {
+            const toolbar = document.getElementById('lwa-toolbar');
+            if (toolbar) {
+                console.log('✅ Writing Assistant toolbar found!');
+            } else {
+                console.log('❌ Writing Assistant toolbar not found. Extension may not be loaded.');
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

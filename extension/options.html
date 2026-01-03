@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Writing Assistant - Settings</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="password"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-test {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-test:hover {
+            background: #229954;
+        }
+
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .status.success {
+            background: #d5f4e6;
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .privacy-notice {
+            background: #e8f6f3;
+            border: 1px solid #1abc9c;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-notice h3 {
+            color: #1abc9c;
+            margin-top: 0;
+            font-size: 16px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 5px 0;
+            color: #7f8c8d;
+        }
+
+        .feature-list li::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖋️ Local Writing Assistant</h1>
+        <p class="subtitle">Privacy-first grammar checking, text rewriting, and voice input</p>
+
+        <div class="privacy-notice">
+            <h3>🔒 Your Privacy is Protected</h3>
+            <p>All processing happens locally on your computer. No data is sent to external servers or stored in the cloud.</p>
+        </div>
+
+        <form id="settingsForm">
+            <div class="section">
+                <h2>Server Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="serverUrl">Server URL</label>
+                    <input type="url" id="serverUrl" placeholder="http://127.0.0.1:8000">
+                    <div class="help-text">URL of your local writing assistant server</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiToken">API Token</label>
+                    <input type="password" id="apiToken" placeholder="Enter your API token">
+                    <div class="help-text">Found in your .env file after running the setup script</div>
+                </div>
+
+                <button type="button" id="testConnection" class="btn-test">Test Connection</button>
+                <div id="connectionStatus" class="hidden"></div>
+            </div>
+
+            <div class="section">
+                <h2>Language & Behavior</h2>
+                
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <select id="language">
+                        <option value="en-US">English (US)</option>
+                        <option value="en-GB">English (UK)</option>
+                        <option value="en-CA">English (Canada)</option>
+                        <option value="en-AU">English (Australia)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="debounceDelay">Check Delay (ms)</label>
+                    <input type="number" id="debounceDelay" min="100" max="2000" step="100" placeholder="600">
+                    <div class="help-text">How long to wait after typing stops before checking grammar</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Features</h2>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="enabled">
+                        <label for="enabled">Enable writing assistance</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showToolbar">
+                        <label for="showToolbar">Show floating toolbar</label>
+                    </div>
+                    <div class="help-text">Displays Fix, Concise, Formal, Friendly, and Voice buttons near text inputs</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Available Features</h2>
+                <ul class="feature-list">
+                    <li>Real-time grammar and spelling checking</li>
+                    <li>AI-powered text rewriting (Fix, Concise, Formal, Friendly)</li>
+                    <li>Voice-to-text input with push-to-talk</li>
+                    <li>Tone analysis (sentiment and formality detection)</li>
+                    <li>Works on Gmail, Twitter, Google Docs, and most websites</li>
+                    <li>Completely offline after initial setup</li>
+                    <li>No data tracking or external API calls</li>
+                </ul>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-primary">Save Settings</button>
+                <button type="button" id="resetSettings" class="btn-secondary">Reset to Defaults</button>
+            </div>
+        </form>
+
+        <div id="saveStatus" class="hidden"></div>
+        
+        <div class="section">
+            <h2>Getting Started</h2>
+            <ol>
+                <li><strong>Start the local server:</strong> Run <code>scripts\windows\StartLocalAssistant.bat</code></li>
+                <li><strong>Get your API token:</strong> Check the <code>.env</code> file in your project folder</li>
+                <li><strong>Configure above:</strong> Enter your server URL and API token</li>
+                <li><strong>Test the connection:</strong> Click "Test Connection" to verify everything works</li>
+                <li><strong>Start writing:</strong> Visit any website and start typing in text fields</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

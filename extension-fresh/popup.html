@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body { width: 300px; padding: 20px; font-family: Arial, sans-serif; }
+    button { width: 100%; padding: 10px; margin: 5px 0; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .status { margin: 10px 0; padding: 10px; border-radius: 4px; text-align: center; }
+    .ok { background: #d4edda; color: #155724; }
+    .err { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <h3>Writing Assistant</h3>
+  <div id="status" class="status">Checking server...</div>
+  <button id="btnSettings">Settings</button>
+  <button id="btnDocs">API Docs</button>
+  <script src="popup.js"></script>
+</body>
+</html>

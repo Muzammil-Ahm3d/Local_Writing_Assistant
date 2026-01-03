@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Writing Assistant</title>
+    <style>
+        body {
+            width: 300px;
+            min-height: 200px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .status {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .status.connected {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        
+        .status.disconnected {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: #f44336;
+        }
+        
+        .status h3 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+        
+        .status p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+        
+        .features {
+            margin-top: 15px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        
+        .feature-icon {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 Writing Assistant</h1>
+        <p>Privacy-first AI writing tools</p>
+    </div>
+
+    <div id="serverStatus" class="status">
+        <h3><span class="loading"></span> Checking server...</h3>
+        <p>Connecting to local server...</p>
+    </div>
+
+    <div class="buttons">
+        <button id="openOptions">⚙️ Settings</button>
+        <button id="openDocs">📖 API Documentation</button>
+        <button id="testConnection">🔍 Test Connection</button>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <span class="feature-icon">📝</span>
+            <span>Grammar checking</span>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">🔄</span>
+            <span>AI text rewriting</span>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">🎭</span>
+            <span>Tone analysis</span>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">🎤</span>
+            <span>Voice input</span>
+        </div>
+    </div>
+
+    <script>
+        // Check server status on popup open
+        document.addEventListener('DOMContentLoaded', checkServerStatus);
+        
+        // Button event listeners
+        document.getElementById('openOptions').addEventListener('click', () => {
+            chrome.runtime.openOptionsPage();
+            window.close();
+        });
+        
+        document.getElementById('openDocs').addEventListener('click', async () => {
+            const result = await chrome.storage.sync.get(['serverUrl']);
+            const serverUrl = result.serverUrl || 'http://127.0.0.1:8000';
+            chrome.tabs.create({ url: `${serverUrl}/docs` });
+            window.close();
+        });
+        
+        document.getElementById('testConnection').addEventListener('click', checkServerStatus);
+
+        async function checkServerStatus() {
+            const statusDiv = document.getElementById('serverStatus');
+            
+            try {
+                const result = await chrome.storage.sync.get(['serverUrl', 'apiToken']);
+                const serverUrl = result.serverUrl || 'http://127.0.0.1:8000';
+                const apiToken = result.apiToken || '';
+
+                statusDiv.innerHTML = '<h3><span class="loading"></span> Testing connection...</h3><p>Checking server health...</p>';
+                statusDiv.className = 'status';
+
+                const response = await fetch(`${serverUrl}/health`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    statusDiv.innerHTML = '<h3>✅ Server Online</h3><p>All systems operational</p>';
+                    statusDiv.className = 'status connected';
+                } else {
+                    statusDiv.innerHTML = '<h3>⚠️ Server Issues</h3><p>Server responding but may have problems</p>';
+                    statusDiv.className = 'status disconnected';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<h3>❌ Server Offline</h3><p>Make sure the server is running</p>';
+                statusDiv.className = 'status disconnected';
+            }
+        }
+    </script>
+</body>
+</html>

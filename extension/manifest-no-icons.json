@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Local Writing Assistant",
+  "version": "1.0.0",
+  "description": "Privacy-first, offline grammar checking, text rewriting, and voice input powered by local AI models.",
+  
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "options_page": "options.html",
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Local Writing Assistant"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Local Writing Assistant</title>
+    <style>
+      body { width: 320px; min-height: 220px; margin: 0; padding: 16px; font-family: Arial, sans-serif; }
+      h3 { margin: 0 0 6px 0; }
+      .muted { color: #666; margin: 0 0 12px 0; font-size: 12px; }
+      .status { padding: 10px; border-radius: 6px; margin: 12px 0; text-align: center; border: 1px solid #ddd; }
+      .ok { background: #e8f6ee; border-color: #b2e2c4; color: #1b7f44; }
+      .err { background: #fdeaea; border-color: #f5c2c7; color: #842029; }
+      button { width: 100%; padding: 10px; margin: 6px 0; border: none; border-radius: 6px; cursor: pointer; background: #2563eb; color: white; }
+      button:hover { background: #1e4fd3; }
+      button:disabled { background: #9ca3af; cursor: not-allowed; }
+      .kv { font-size: 12px; color: #444; margin-top: 10px; }
+      .kv .label { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h3>🤖 Writing Assistant</h3>
+    <p class="muted">Privacy-first AI writing tools</p>
+
+    <div id="status" class="status">Checking server...</div>
+    <button id="btnTest">🔍 Test Connection</button>
+    <button id="btnOptions">⚙️ Settings</button>
+    <button id="btnDocs">📖 API Docs</button>
+
+    <div class="kv">
+      <div><span class="label">Server:</span> <span id="serverTxt">...</span></div>
+      <div><span class="label">Token:</span> <span id="tokenTxt">...</span></div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html

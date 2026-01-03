@@ -1,0 +1,6 @@
+{
+  "manifest_version": 3,
+  "name": "Local Writing Assistant",
+  "version": "1.0.0",
+  "description": "Privacy-first writing assistant"
+}
