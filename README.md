@@ -211,7 +211,7 @@ ffmpeg -version
 | Voice transcription | 1-3s | ~2s |
 | Tone analysis | <50ms | ~20ms |
 
-*Results on Intel i5-8250U (4 cores, 1.6GHz base)*
+*Results on AMD Ryzen 5 7535HS with Radeon Graphics (3.30 GHz)*
 
 ## 🗂️ Project Structure
 
