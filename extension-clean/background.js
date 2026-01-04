@@ -1,3 +1,4 @@
+
 // Minimal background service worker (CSP-safe, no icons, no inline code)
 console.log('LWA: service worker starting');
 
@@ -8,7 +9,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       serverUrl: 'http://127.0.0.1:8001',
       apiToken: 'test123456789',
       enabled: true
-    });
+    });      
   }
 });
 
